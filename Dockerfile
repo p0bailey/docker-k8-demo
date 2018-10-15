@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM python:2.7-alpine
 
 COPY . /app
 
@@ -6,6 +6,4 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["python"]
-
-CMD ["app.py"]
+CMD ["gunicorn"  , "-b", "0.0.0.0:80", "app:app"]
